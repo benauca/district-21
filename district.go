@@ -2,76 +2,100 @@ package main
 
 import (
 	"fmt"
+	"district-21/models"
+	"district-21/models/boards"
+	"district-21/models/tokens"
+	"github.com/google/uuid"
 )
+
+var colors = make(map[string]string)
 
 func main() {
 
+	colors["0"]= "red"
+	colors["1"]= "blue"
+
 	var name string
 	var color string
+	isRunning := true
+	
+	
+	// Format Wellcome page
 	fmt.Println("Wellcome District 21 Game")
-	fmt.Println("Introduce tu nombre: ")
+	fmt.Print("Player one: ")
 	fmt.Scanln(&name)
+	fmt.Println("Reinos disponibles: %v", colors)
 	fmt.Println("Selecciona un color: \n\t [0] Rojo \n\t [1] Azul")
 	fmt.Scanln(&color)
-	player1 := Player{
-		name:  name,
-		color: color,
+	playerOne := initPlayerOne(name, color)
+	delete(colors, playerOne.Realm)
+	fmt.Println("Reinos disponibles: %v\n", colors)
+	for key, color := range colors {
+		fmt.Println("Key:", key)
+		fmt.Println("Realm:", color)
 	}
-	fmt.Printf("You are wellcome %s\n", player1)
-}
-
-// Representa el jugador de la partida
-type Player struct {
-	name  string
-	color string
-}
-
-func (player *Player) GetName() string {
-	return player.name
+	initPlayerTwo()
+	initGame()
+	for isRunning==true {
+				
+	}
 }
 
 /**
- * Return Color
+ * Inicializa el juego Distrito 21
+ * 	- Inicializa el tablero
+ * 	- Inicializa las fichas
  */
-func (player *Player) GetColor() string {
-	return player.color
+func initGame()  {
+	initBoardGame()
 }
 
-// Representa el Juego
-type Game struct {
+/**
+ * Inicializa el tablero
+ */
+func initBoardGame()  {
+	fmt.Println("--Init boardgame")
+	box00 := boards.Box { Coord_x: 0, Coord_y: 0,}
+	fmt.Println("Box 0", box00)
+	//Init Tokens...................................................
+	}
+
+/**
+ * Inicializa las fichas en el tablero
+ */
+ func initPlayerOne(name string, realm string) models.Player  {
+	fmt.Println("-- Init player one.......................")
+	playerOne := models.Player{
+		Realm: colors[realm],
+	}
+	playerOne.Name = name
+	playerOne.SetUUID()
+	fmt.Printf("You are wellcome \n\t[Nick]: %s \n\t[ID]: %s\n\t[Realm]: %s\n}\n", playerOne.Name, playerOne.UUID, playerOne.Realm)
+	//Init tokens
+	chief_1 := tokens.Token { TypeToken: 1, UUID: uuid.New()}
+	playerOne.SetChief(chief_1)
+	//Init Detectives
+	var detectives []tokens.Token
+	for i := 0; i < 7; i++ {
+		detectives = append(detectives, tokens.Token { TypeToken: 2, UUID: uuid.New()})
+	}
+	
+	playerOne.SetDetectives(detectives)
+
+	//Init Policies
+	var policies []tokens.Token 
+	for i := 0; i < 8; i++ {
+		policies = append(policies, tokens.Token { TypeToken: 3, UUID: uuid.New()})
+	}
+	playerOne.SetPolicies(policies)
+	fmt.Println("player One", playerOne)
+	return playerOne
 }
 
-// Representa el tablero
-type Board struct {
+/**
+ * Inicializa las fichas en el tablero
+ */
+ func initPlayerTwo()  {
+	fmt.Println("--Init player two.......................")
 }
 
-// Representa una ficha en el tablero, typo, position, movimiento
-type Token struct {
-	//Coordenadas que ocupa la ficha en el tablero
-	coord_x int
-	coord_y int
-	//Direccion por la que se puede mover la ficha
-	direction int
-	//Tipo de la ficha. 0 - KING, 1 - KNIGHT, 2 - INFANTRY
-	tokenType int
-}
-
-func (token *Token) GetDirection() int {
-	return token.direction
-}
-
-func (token *Token) GetCoordX() int {
-	return token.coord_x
-}
-
-func (token *Token) GetCoordY() int {
-	return token.coord_y
-}
-
-func (token *Token) GetAsCord() string {
-	return fmt.Sprintf("(%d,%d)", token.coord_x, token.coord_y)
-}
-
-func (token *Token) GetType() int {
-	return token.tokenType
-}
