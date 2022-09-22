@@ -28,7 +28,7 @@ func main() {
 	fmt.Printf("Selecciona un color: \n\t [0] Rojo \n\t [1] Azul\n")
 	fmt.Scanln(&color)
 	playerOne := initPlayerOne(name, color)
-	delete(colors, playerOne.Realm)
+	delete(colors, playerOne.GetRealm())
 	fmt.Printf("Reinos disponibles: %v\n", colors)
 	for key, color := range colors {
 		fmt.Println("Key:", key)
@@ -65,12 +65,11 @@ func initBoardGame()  {
  */
  func initPlayerOne(name string, realm string) models.Player  {
 	fmt.Println("-- Init player one.......................")
-	playerOne := models.Player{
-		Realm: colors[realm],
-	}
+	playerOne := models.Player{}
 	playerOne.Name = name
+	playerOne.SetRealm(colors[realm])
 	playerOne.SetUUID()
-	fmt.Printf("You are wellcome \n\t[Nick]: %s \n\t[ID]: %s\n\t[Realm]: %s\n}\n", playerOne.Name, playerOne.UUID, playerOne.Realm)
+	fmt.Printf("You are wellcome \n\t[Nick]: %s \n\t[ID]: %s\n\t[Realm]: %s\n}\n", playerOne.Name, playerOne.UUID, playerOne.GetRealm())
 	//Init tokens
 	chief_1 := tokens.Token { TypeToken: 1, UUID: uuid.New()}
 	playerOne.SetChief(chief_1)
