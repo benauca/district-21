@@ -1,4 +1,5 @@
 # district-21
+![Coverage](https://img.shields.io/badge/Coverage-2-red)
 
 District 21 Game
 
