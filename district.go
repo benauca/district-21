@@ -36,7 +36,7 @@ func main() {
 	}
 	initPlayerTwo()
 	initGame()
-	for isRunning==true {
+	for isRunning {
 				
 	}
 }

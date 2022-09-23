@@ -26,7 +26,7 @@ import (
 
 }
 
-func (box *Box) loadToBoxes() {}
+//func (box *Box) loadToBoxes() {}
 
 /**
  * Asocia una ficha a la casilla

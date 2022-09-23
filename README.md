@@ -27,11 +27,6 @@ I’ll employ are:
   
 ### CI-WORKFLOW [ ./gihub/workspaces/ci-go.yml ]
 
-### TO DOs
-
-- https://github.com/tj-actions/coverage-badge-go/tree/main/.github/workflows
-- https://medium.com/synechron/how-to-set-up-a-test-coverage-threshold-in-go-and-github-167f69b940dc
-
 Start with any events on
 
 - Push:
@@ -45,7 +40,11 @@ stateDiagram
     checkout@v3 --> setup_go@v3
     setup_go@v3 --> vet
     vet --> fmt
-    fmt --> build
+    fmt --> test
+    test --> go_coverage_badge
+    go_coverage_badge --> verify_changed_files
+    verify_changed_files --> push_changes
+    push_changes --> build
     build --> [*]
 ```
 
@@ -81,6 +80,11 @@ stateDiagram
     setup_go@v3 --> goreleaser
     goreleaser --> [*]
 ```
+
+### TODOs
+
+- [coverage-badge-go](https://github.com/tj-actions/coverage-badge-go/tree/main/.github/workflows)
+- [how-to-set-up-a-test-coverage-threshold](https://medium.com/synechron/how-to-set-up-a-test-coverage-threshold-in-go-and-github-167f69b940dc)
 
 ## Colaborate
 
