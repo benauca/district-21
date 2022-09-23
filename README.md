@@ -1,4 +1,5 @@
 # district-21
+
 ![Coverage](https://img.shields.io/badge/Coverage-90.0%25-brightgreen)
 
 District 21 Game
@@ -79,6 +80,20 @@ stateDiagram
     checkout@v3 --> setup_go@v3
     setup_go@v3 --> goreleaser
     goreleaser --> [*]
+```
+
+### WellCome workflow
+
+```yml
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1.1.0
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "Thanks for reporting this issue, don't forget to star this project if you haven't already to help us reach a wider audience."
+        pr-message: "Thanks for implementing a fix, could you ensure that the test covers your changes if applicable."
 ```
 
 ### TODOs
