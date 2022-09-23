@@ -36,7 +36,10 @@ func main() {
 	}
 	initPlayerTwo()
 	initGame()
-	for isRunning {
+	for {
+		if !isRunning {
+			break
+		}
 				
 	}
 }

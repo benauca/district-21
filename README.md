@@ -1,4 +1,5 @@
 # district-21
+![Coverage](https://img.shields.io/badge/Coverage-2-red)
 
 District 21 Game
 
@@ -10,7 +11,6 @@ If we want test with coverage
 
 > go test ./... -test.coverprofile coverage
 > go test ./... -cover
-
 
 ## CI/CD
 
