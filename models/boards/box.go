@@ -19,14 +19,14 @@ import (
 	token tokens.Token
 
 	//Lista de Casillas a las se puede llegar desde la posicion de la casilla
-	toBox []Box
+	//toBox []Box
 
 	//Lista de Casillas desde las que podemos llegar 
-	fromBox []Box
+	//fromBox []Box
 
 }
 
-func (box *Box) loadToBoxes() {}
+//func (box *Box) loadToBoxes() {}
 
 /**
  * Asocia una ficha a la casilla
